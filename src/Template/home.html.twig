@@ -1,0 +1,17 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1>Bienvenue, {{ username }}</h1>
+        <p>{{ dbStatus }}</p>
+        
+        <h2>Liste des utilisateurs</h2>
+        <ul class="list-group">
+            {% for user in users %}
+                <li class="list-group-item">{{ user.name }} {{ user.surname }} ({{ user.username }})</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

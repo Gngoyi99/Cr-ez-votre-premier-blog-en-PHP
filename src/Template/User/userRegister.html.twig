@@ -1,0 +1,81 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block content %}
+    <h1>S'inscrire</h1>
+    <form action="/BlogPHP/userRegister" method="POST" onsubmit="return validateForm()" class="mt-4">
+        <div class="mb-3">
+            <label for="surname" class="form-label">Nom :</label>
+            <input type="text" id="surname" name="surname" placeholder="Nom" required class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Prénom :</label>
+            <input type="text" id="name" name="name" placeholder="Prénom" required class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="username" class="form-label">Pseudo :</label>
+            <input type="text" id="username" name="username" placeholder="Pseudo" required class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email :</label>
+            <input type="email" id="email" name="email" placeholder="Email" required class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Mot de passe :</label>
+            <input type="password" id="password" name="password" placeholder="Mot de passe" required class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+    </form>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    function validateForm() {
+        let name = document.getElementById('name').value;
+        let surname = document.getElementById('surname').value;
+        let username = document.getElementById('username').value;
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('password').value;
+
+        // Validation REGEX
+        let nameRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s'\-]+$/;
+        let surnameRegex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s'\-]+$/;
+        let usernameRegex = /^[a-zA-Z0-9_]+$/;
+        let passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[^\w\d\s]).{8,}$/;
+
+        if (!nameRegex.test(name)) {
+            alert('Le nom ne peut contenir que des lettres, des espaces, des apostrophes et des tirets');
+            return false;
+        }
+
+        if (!surnameRegex.test(surname)) {
+            alert('Le prénom ne peut contenir que des lettres, des espaces, des apostrophes et des tirets');
+            return false;
+        }
+
+        if (!usernameRegex.test(username)) {
+            alert('Le nom d\'utilisateur ne peut contenir que des lettres, des chiffres et des soulignements');
+            return false;
+        }
+
+        if (!email || !validateEmail(email)) {
+            alert('Veuillez entrer une adresse e-mail valide');
+            return false;
+        }
+
+        if (!passwordRegex.test(password)) {
+            alert('Le mot de passe doit contenir au moins 8 caractères avec au moins une majuscule, un chiffre et un caractère spécial');
+            return false;
+        }
+
+        return true;
+    }
+
+    function validateEmail(email) {
+        // Validation del 'e-mail 
+        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+</script>
+{% endblock %}

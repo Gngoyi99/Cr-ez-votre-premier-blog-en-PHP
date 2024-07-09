@@ -1,0 +1,17 @@
+{
+    "name": "blog/twig",
+    "description": "creation de blog",
+    "autoload": {
+        "psr-4": {
+            "Blog\\Twig\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Germain Ngoyi"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.10"
+    }
+}

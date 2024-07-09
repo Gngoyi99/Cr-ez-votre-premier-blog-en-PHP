@@ -1,0 +1,25 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1>Se connecter</h1>
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <form method="POST" action="/BlogPHP/userLogin" class="mt-3">
+            <div class="mb-3">
+                <label for="username" class="form-label">Pseudo :</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mot de passe :</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Se connecter</button>
+        </form>
+    </div>
+{% endblock %}

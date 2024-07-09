@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page non trouvée</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/BlogPHP/home">Accueil</a>
+            <a href="/BlogPHP/userLogin">Se connecter</a>
+            <a href="/BlogPHP/userRegister">S'inscrire</a>
+            {% if username %}
+                <span>Bonjour, {{ username }}</span>
+                <a href="/BlogPHP/logout">Se déconnecter</a>
+            {% endif %}
+            <a href="/BlogPHP/listPost">Tous les articles</a>
+            <a href="/BlogPHP/addPost">Ajouter un article</a>
+        </nav>
+    </header>
+
+    <h1>Page non trouvée</h1>
+    <p>La page que vous recherchez n'existe pas.</p>
+    <p>URI demandée : {{ uri }}</p>
+</body>
+</html>
