@@ -1,0 +1,45 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Modifier le Profil{% endblock %}
+
+{% block content %}
+    <h1>Modifier le Profil</h1>
+    <form action="/BlogPHP/editProfile" method="POST" enctype="multipart/form-data" class="mt-4">
+        <div class="mb-3">
+            <label for="surname" class="form-label">Nom :</label>
+            <input type="text" id="surname" name="surname" value="{{ user.surname }}" placeholder="Nom" required class="form-control">
+            {% if errors.surname %}
+                <div class="invalid-feedback" style="display:block;">{{ errors.surname }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Prénom :</label>
+            <input type="text" id="name" name="name" value="{{ user.name }}" placeholder="Prénom" required class="form-control">
+            {% if errors.name %}
+                <div class="invalid-feedback" style="display:block;">{{ errors.name }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Phrase d'accroche :</label>
+            <input type="text" id="message" name="message" value="{{ user.message }}" placeholder="Phrase d'accroche" required class="form-control">
+            {% if errors.message %}
+                <div class="invalid-feedback" style="display:block;">{{ errors.message }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="cv_file" class="form-label">CV :</label>
+            <input type="file" id="cv_file" name="cv_file" class="form-control">
+            {% if errors.cv_file %}
+                <div class="invalid-feedback" style="display:block;">{{ errors.cv_file }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="photo" class="form-label">Photo de profil :</label>
+            <input type="file" id="photo" name="photo" class="form-control">
+            {% if errors.photo %}
+                <div class="invalid-feedback" style="display:block;">{{ errors.photo }}</div>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+{% endblock %}

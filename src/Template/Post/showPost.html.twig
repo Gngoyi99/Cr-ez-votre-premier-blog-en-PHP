@@ -1,10 +1,52 @@
 {% extends 'index.html.twig' %}
 
-{% block title %}Détail de l'article{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
-    <h1>Détail de l'article</h1>
-    <!-- Afficher le contenu de l'article ici -->
-    <p>Contenu de l'article...</p>
-    {% include 'editDeletePost.html.twig' %}
+<div class="container mt-4">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2>{{ post.title }}</h2>
+            <small>Publié le {{ post.created_at|date("d/m/Y") }}</small>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><strong>Chapô: </strong>{{ post.chapo }}</p>
+            <p class="card-text">{{ post.content }}</p>
+        </div>
+        <div class="card-footer">
+            <a href="/BlogPHP/editPost/{{ post.postId }}" class="btn btn-primary">Modifier</a>
+            <a href="/BlogPHP/deletePost/{{ post.postId }}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article?')">Supprimer</a>
+        </div>
+    </div>
+
+    <h3>Commentaires</h3>
+    <div class="card mb-4">
+        <div class="card-body">
+            {% if comments is not empty %}
+                {% for comment in comments %}
+                    <div class="mb-3">
+                        <p><strong>{{ comment.user_id }}</strong> le {{ comment.created_at|date("d/m/Y H:i") }}</p>
+                        <p>{{ comment.content }}</p>
+                        <a href="/BlogPHP/editComment/{{ comment.commentId }}" class="btn btn-secondary btn-sm">Modifier</a>
+                        <a href="/BlogPHP/deleteComment/{{ comment.commentId }}" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire?')">Supprimer</a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Aucun commentaire pour cet article.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if username %}
+        <h4>Ajouter un commentaire</h4>
+        <form method="post" action="/BlogPHP/addComment/{{ post.postId }}">
+            <div class="mb-3">
+                <textarea id="content" name="content" class="form-control" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+    {% else %}
+        <p>Vous devez être <a href="/BlogPHP/userLogin">connecté</a> pour ajouter un commentaire.</p>
+    {% endif %}
+</div>
 {% endblock %}

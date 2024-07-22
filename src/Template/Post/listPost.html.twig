@@ -3,12 +3,16 @@
 {% block title %}Liste des articles{% endblock %}
 
 {% block content %}
-    <div class="container mt-4">
-        <h1>Liste des articles</h1>
-        <div class="list-group">
-            <a class="list-group-item list-group-item-action" href="/BlogPHP/showPost" >Article 1</a>
-            <a  class="list-group-item list-group-item-action" href="/BlogPHP/showPost">Article 2</a>
-            <!-- Ajoutez d'autres articles ici -->
-        </div>
+<div class="container mt-4">
+    <h1>Liste des articles</h1>
+    <div class="list-group">
+        {% for post in posts %}
+        <a href="/BlogPHP/showPost/{{ post.postId }}" class="list-group-item list-group-item-action">
+            <h5 class="mb-1">{{ post.title }}</h5>
+            <p class="mb-1">{{ post.chapo }}</p>
+            <small>Dernière modification : {{ post.updated_at|date('d/m/Y H:i') }}</small>
+        </a>
+        {% endfor %}
     </div>
+</div>
 {% endblock %}

@@ -1,3 +1,20 @@
-h1{
-    color:red;
+img{
+    object-fit: contain;
 }
+
+.background-logged-in {
+    background-image: url('./uploads/fonds/img.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+}
+
+.background-logged-out {
+    background-image: url('./uploads/fonds/Desert.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+}
+

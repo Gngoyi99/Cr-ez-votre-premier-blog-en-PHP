@@ -5,11 +5,12 @@ use PDO;
 use PDOException;
 use Twig\Environment;
 
-abstract class DbController {
+abstract class CoreController {
     protected $twig;
     protected $db;
     public $dbStatus;
-
+    
+//Changer le nommage CoreController
     public function __construct(Environment $twig) {
         $this->twig = $twig;
 
@@ -22,7 +23,7 @@ abstract class DbController {
             }
 
         $config = require $configPath;
-        
+
         try {
             // Initialiser la connexion à la base de données
             $dsn = "mysql:host={$config['host']};dbname={$config['dbname']};charset={$config['charset']}";

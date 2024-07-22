@@ -1,0 +1,17 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Modifier le commentaire{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Modifier le commentaire</h1>
+    <form method="post" action="/BlogPHP/editComment/{{ comment.commentId }}">
+        <div class="mb-3">
+            <label for="content" class="form-label">Contenu du commentaire</label>
+            <textarea id="content" name="content" class="form-control" rows="5">{{ comment.content }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+    </form>
+    <a href="/BlogPHP/deleteComment/{{ comment.commentId }}" class="btn btn-danger mt-3">Supprimer le commentaire</a>
+</div>
+{% endblock %}

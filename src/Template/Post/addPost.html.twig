@@ -5,14 +5,27 @@
 {% block content %}
 <div class="container mt-5">
     <h1 class="mb-4">Ajouter un article</h1>
-    <form method="post" action="/BlogPHP/add_post">
+    <form method="post" action="/BlogPHP/addPost">
         <div class="mb-3">
             <label for="title" class="form-label">Titre :</label>
             <input type="text" id="title" name="title" class="form-control" required>
+            {% if errors.title %}
+                <div class="invalid-feedback" style="display:block;">{{ errors.title }}</div>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="chapo" class="form-label">Chapô :</label>
+            <input type="text" id="chapo" name="chapo" class="form-control" required>
+            {% if errors.chapo %}
+                <div class="invalid-feedback" style="display:block;">{{ errors.chapo }}</div>
+            {% endif %}
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">Contenu :</label>
             <textarea id="content" name="content" class="form-control" rows="5" required></textarea>
+            {% if errors.content %}
+                <div class="invalid-feedback" style="display:block;">{{ errors.content }}</div>
+            {% endif %}
         </div>
         <button type="submit" class="btn btn-primary">Ajouter</button>
     </form>

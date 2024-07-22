@@ -9,9 +9,8 @@ use Blog\Twig\Controller\Error\ErrorController;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 
-// Définir le chemin racine du projet(Problème lors de la création class Abs avec le fichier config.php)
+// Définir le chemin racine du projet
 define('BASE_PATH', __DIR__);
-
 
 // Démarrer la session
 session_start();
@@ -36,38 +35,75 @@ function handleRoute($mainController, $userController, $postController, $comment
         $uri = substr($uri, strlen('/BlogPHP'));
     }
 
-    switch ($uri) {
-        case '/':
+    $segments = explode('/', trim($uri, '/'));
+
+    switch ($segments[0]) {
         case '':
-        case '/index.php':
+        case 'index.php':
             // Rediriger vers la page d'accueil
             header('Location: /BlogPHP/home');
             break;
-        case '/home':
+        case 'home':
             $mainController->home();
             break;
-        case '/userLogin':
+        case 'userLogin':
             $userController->userLogin();
             break;
-        case '/userRegister':
+        case 'userRegister':
             $userController->userRegister();
             break;
-        case '/listPost':
+        case 'editProfile':
+            $userController->editProfile();
+            break;
+        case 'listPost':
             $postController->listPost();
             break;
-        case '/showPost':
-            $postController->showPost();
+        case 'showPost':
+            if (isset($segments[1]) && is_numeric($segments[1])) {
+                $postController->showPost($segments[1]);
+            } else {
+                $errorController->notFound($uri);
+            }
             break;
-        case '/addPost':
+        case 'addPost':
             $postController->addPost();
             break;
-        case '/editDeletePost':
-            $postController->editDeletePost();
+        case 'editPost':
+            if (isset($segments[1]) && is_numeric($segments[1])) {
+                $postController->editPost($segments[1]);
+            } else {
+                $errorController->notFound($uri);
+            }
             break;
-        case '/editDeleteComment':
-            $commentController->editDeleteComment();
+        case 'deletePost':
+            if (isset($segments[1]) && is_numeric($segments[1])) {
+                $postController->deletePost($segments[1]);
+            } else {
+                $errorController->notFound($uri);
+            }
             break;
-        case '/logout':
+        case 'editComment':
+            if (isset($segments[1]) && is_numeric($segments[1])) {
+                $commentController->editComment($segments[1]);
+            } else {
+                $errorController->notFound($uri);
+            }
+            break;
+        case 'deleteComment':
+            if (isset($segments[1]) && is_numeric($segments[1])) {
+                $commentController->deleteComment($segments[1]);
+            } else {
+                $errorController->notFound($uri);
+            }
+            break;
+        case 'addComment':
+            if (isset($segments[1]) && is_numeric($segments[1])) {
+                $commentController->addComment($segments[1]);
+            } else {
+                $errorController->notFound($uri);
+            }
+            break;
+        case 'logout':
             $userController->logout();
             break;
         default:
